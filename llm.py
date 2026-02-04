@@ -1,3 +1,4 @@
+import os
 from groq import Groq
 from visionai import generate_image_caption, extract_text
 
@@ -7,7 +8,7 @@ def generate_image_description(image_path, user_request):
     ocr = extract_text(image_path)
     result = f"{prompt}{image}Optical Character Recognition: {ocr} User-Request: {user_request}"
 
-    api = "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"
+    api = os.environ.get("GROQ_API_KEY")
     client = Groq(api_key=api)
     completion = client.chat.completions.create(
         model="llama-3.3-70b-specdec",
